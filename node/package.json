@@ -1,0 +1,41 @@
+{
+  "name": "the-kpop-unicorn",
+  "version": "1.0.0",
+  "description": "The Kpop Unicorn Node API",
+  "author": "Thomas Bullier <thomasbullier@gmail.com>",
+  "license": "private",
+  "scripts": {
+    "start": "NODE_ENV=dev NODE_TLS_REJECT_UNAUTHORIZED=0 nodemon app/app.js",
+    "prod": "NODE_ENV=prod node app/app.js",
+    "doc": "npm run doc-api && npm run doc-node",
+    "doc-api": "./node_modules/apidoc/bin/apidoc -i app/ -o ../docs/node-api/",
+    "doc-node": "./node_modules/documentation/bin/documentation.js build app/** -f html -o ../docs/node/",
+    "test": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 mocha 'test/**/*.js'",
+    "coverage": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 istanbul cover  --dir '../docs/node-code-coverage' node_modules/mocha/bin/_mocha 'test/**/*.js'"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "bunyan": "^1.8.5",
+    "cors": "^2.8.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "lodash": "^4.16.2",
+    "moment": "^2.15.1",
+    "request": "^2.75.0",
+    "request-promise": "^4.1.1",
+    "spotify-web-api-node": "^2.5.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.0",
+    "apidoc": "^0.17.4",
+    "documentation": "^4.0.0-beta.18",
+    "istanbul": "^0.4.5",
+    "supertest": "^2.0.0"
+  },
+  "apidoc": {
+    "title": "The Kpop Unicorn Node API",
+    "url": ""
+  }
+}

@@ -1,0 +1,5 @@
+/node/environments/environment.dev
+/node/environments/environment.prod
+/node/environments/environment.test
+/node/node_modules
+/node/ssl
