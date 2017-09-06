@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Implemented a basic node/express stack with logging, SSL and environments
 - Implemented a first spotify API call
 - Implemented static data for French halls
+- Implemented musixmatch, musicbrainz and twitter API calls
 
 ### React Frontend
 #### Added

@@ -14,6 +14,7 @@
     "coverage": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 istanbul cover  --dir '../docs/node-code-coverage' node_modules/mocha/bin/_mocha 'test/**/*.js'"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "bunyan": "^1.8.5",
@@ -22,9 +23,8 @@
     "express": "^4.14.0",
     "lodash": "^4.16.2",
     "moment": "^2.15.1",
-    "request": "^2.75.0",
-    "request-promise": "^4.1.1",
-    "spotify-web-api-node": "^2.5.0"
+    "spotify-web-api-node": "^2.5.0",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
