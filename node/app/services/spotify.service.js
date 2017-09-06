@@ -23,13 +23,19 @@ function getSpotifyAccessToken()
 }
 
 /**
- * Retrieve artist albums
+ * Retrieve artist data
  */
-exports.getArtistAlbums = () => {
+exports.getArtist = (artistTitle) => {
   return getSpotifyAccessToken().then((spotifyApi) => {
-    return spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
+    return spotifyApi.searchArtists(artistTitle)
       .then((data) => {
-        return data.body;
+        const items = data.body.artists.items;
+        return {
+          title: artistTitle,
+          name: items.length > 0 ? items[0].name : null,
+          popularity: items.length > 0 ? items[0].popularity : null,
+          image: items[0].images.length > 0 ? items[0].images[0].url : null
+        };
       });
   });
 }

@@ -13,8 +13,7 @@ import {
   Card,
   Icon,
 } from 'semantic-ui-react'
-
-const src = 'http://placehold.it/150x150';
+import NodeApiService from '../../services/node-api.service.js';
 
 export class BandIndexComponent extends Component {
   constructor(props) {
@@ -25,8 +24,9 @@ export class BandIndexComponent extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      data: ['snsd', 'exo', 'red velvet']
+    const nodeApiService = new NodeApiService();
+    nodeApiService.getData('/api/bands').then((data) => {
+      this.setState({data: data})
     });
   }
 
@@ -36,25 +36,17 @@ export class BandIndexComponent extends Component {
         <h1>Kpop bands</h1>
         <Card.Group itemsPerRow={4}>
           { this.state.data.map((item) => (
-            <Card key={item}>
-              <Image src={src} />
+            <Card key={item.title}>
+              <Image src={item.image} size='small' wrapped/>
               <Card.Content>
                 <Card.Header>
-                  {item}
+                  {item.title}
                 </Card.Header>
-                <Card.Meta>
-                  <span className='date'>
-                    Joined in 2015
-                  </span>
-                </Card.Meta>
-                <Card.Description>
-                  XXX
-                </Card.Description>
               </Card.Content>
               <Card.Content extra>
                 <a>
-                  <Icon name='user' />
-                  22 Friends
+                  <Icon name='spotify' />
+                  {item.popularity}
                 </a>
               </Card.Content>
             </Card>

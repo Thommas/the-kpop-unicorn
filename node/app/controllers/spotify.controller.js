@@ -12,8 +12,8 @@ const util = require('util');
 const spotifyService = require('../services/spotify.service.js');
 
 exports.setup = (app) => {
-  const getArtistAlbums = (req, res) => {
-    res.promise(spotifyService.getArtistAlbums());
+  const getArtist = (req, res) => {
+    res.promise(spotifyService.getArtist(req.query.q));
   };
-  app.get('/api/spotify/artist-albums', getArtistAlbums);
+  app.get('/api/spotify/artist', getArtist);
 }

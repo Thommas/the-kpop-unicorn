@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] - 2017-09-06
 ### Node API
 #### Added
-- Implemented a basic node/express stack with logging, SSL and environments
-- Implemented a first spotify API call
-- Implemented static data for French halls
-- Implemented musixmatch, musicbrainz and twitter API calls
+- Basic node/express stack with logging, SSL and environments
+- First spotify API call
+- Static data for French halls
+- Musixmatch, musicbrainz and twitter API calls
+- Static data for kpop bands with spotify extra data
 
 ### React Frontend
 #### Added
-- Implemented a basic react stack with i18n, routing and environments
-- Implemented all views with static data
-- Implemented a first API call to /api/halls
+- Basic react stack with i18n, routing and environments
+- All views with static data
+- First API call to /api/halls
+- First API call to /api/bands
