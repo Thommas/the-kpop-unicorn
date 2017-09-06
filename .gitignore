@@ -5,3 +5,4 @@
 /node/ssl
 
 /react/node_modules
+/react/.env*.local

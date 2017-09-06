@@ -15,6 +15,9 @@ import { addLocaleData, IntlProvider } from 'react-intl';
 import './App.css';
 import {
   HomeComponent,
+  RankingComponent,
+  BandIndexComponent,
+  HallComponent,
   NavComponent,
   FooterComponent
 } from './components';
@@ -58,9 +61,14 @@ export default class App extends React.Component {
     return (
       <IntlProvider locale={this.state.locale} messages={this.state.messages}>
         <Router>
-          <div>
+          <div className='app'>
             <NavComponent></NavComponent>
-            <Route exact path="/" component={HomeComponent}/>
+            <main className='app-content'>
+              <Route exact path='/' component={HomeComponent}/>
+              <Route path='/ranking' component={RankingComponent}/>
+              <Route path='/band' component={BandIndexComponent}/>
+              <Route path='/hall' component={HallComponent}/>
+            </main>
             <FooterComponent></FooterComponent>
           </div>
         </Router>

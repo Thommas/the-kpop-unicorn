@@ -9,7 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Added
 - Implemented a basic node/express stack with logging, SSL and environments
 - Implemented a first spotify API call
+- Implemented static data for French halls
 
 ### React Frontend
 #### Added
-- Implemented a basic react stack with i18n and routing
+- Implemented a basic react stack with i18n, routing and environments
+- Implemented all views with static data
+- Implemented a first API call to /api/halls
