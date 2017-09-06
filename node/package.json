@@ -1,6 +1,6 @@
 {
-  "name": "the-kpop-unicorn",
-  "version": "1.0.0",
+  "name": "the-kpop-unicorn-node",
+  "version": "0.1.0",
   "description": "The Kpop Unicorn Node API",
   "author": "Thomas Bullier <thomasbullier@gmail.com>",
   "license": "private",

@@ -1,0 +1,7 @@
+a.disabled,
+a.disabled:hover,
+a.disabled:visited,
+a.disabled:link {
+  color: black;
+  pointer-events: none;
+  cursor: default; }

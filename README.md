@@ -4,6 +4,12 @@ The Kpop Unicorn
 Author: Thomas Bullier <thomasbullier@gmail.com>
 Description: Mini Music Hack Day for kpop fans.
 
+Features:
+- A selection of the most popular kpop bands according to French kpop fans
+- Display metrics to gauge each band popularity in France
+- Digital presence in western public APIs compared to the reality in Korea
+- Based on popularity match potential concert halls in France they could perform at
+
 Stack
 -----
 
@@ -14,10 +20,10 @@ React
 
 ## Node API
 
-    cd node
-    npm install
+cd node
+npm install
 
-#### Generate self signed certificates
+#### Generate self signed certificate
 
     mkdir -p ssl
     openssl genrsa 1024 > ssl/server.key
@@ -33,11 +39,6 @@ Edit files with your local configuration.
 
 #### Develop
 
-In environments/environment.dev, empty the SSL variables:
-
-    SSL_CERT=
-    SSL_KEY=
-
 npm start
 
 Access the API here: http://localhost:[PORT]
@@ -52,6 +53,11 @@ npm run coverage
 
 #### Production
 
+In environments/environment.prod, put the absolute path to self signed certificate:
+
+    SSL_CERT=/[path]/ssl/server.crt
+    SSL_KEY=/[path]/ssl/server.key
+
 npm run prod
 
 Access the API here: https://localhost:[PORT]
@@ -59,5 +65,9 @@ Access the API here: https://localhost:[PORT]
 
 ## React frontend
 
-    cd react
-    npm install
+cd react
+npm install
+
+#### Develop
+
+npm start

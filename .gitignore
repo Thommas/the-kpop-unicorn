@@ -3,3 +3,5 @@
 /node/environments/environment.test
 /node/node_modules
 /node/ssl
+
+/react/node_modules
