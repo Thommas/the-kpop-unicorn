@@ -28,3 +28,20 @@ exports.getAlbumCount = (slug) => {
       // TODO: Log error
     });
 }
+
+/**
+ * Get song count
+ */
+exports.getSongCount = (slug) => {
+  const band = bandService.getBandBySlug(slug);
+  const xrayCall = x(band.nautiljon_url, '#menu_onglets_1_paroles');
+  const promise = Promise.promisify(xrayCall);
+  return promise()
+    .then((res) => {
+      return res.replace(/[a-zA-Z\(\)]/g, '').trim();
+    })
+    .catch((err) => {
+      console.log(err)
+      // TODO: Log error
+    });
+}

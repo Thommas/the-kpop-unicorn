@@ -9,6 +9,7 @@
 
 const SpotifyWebApi = require('spotify-web-api-node');
 const cacheService = require('./cache.service.js');
+const bandService = require('./band.service.js');
 
 const SPOTIFY_ACCESS_TOKEN_KEY = 'spotify_access_token';
 
@@ -36,29 +37,29 @@ function getSpotifyAccessToken()
 /**
  * Retrieve artist data
  */
-exports.getArtist = (artistTitle) => {
+exports.getArtist = (slug) => {
+  const band = bandService.getBandBySlug(slug);
   return getSpotifyAccessToken()
     .then((spotifyApi) => {
-      return spotifyApi.searchArtists(artistTitle);
+      return spotifyApi.searchArtists(band.title);
     })
     .then((data) => {
       const items = data.body.artists.items;
-      return {
-        title: artistTitle,
-        name: items.length > 0 ? items[0].name : null,
-        popularity: items.length > 0 ? items[0].popularity : null,
-        image: items[0].images.length > 0 ? items[0].images[0].url : null
-      };
+      band.name = items.length > 0 ? items[0].name : null;
+      band.popularity = items.length > 0 ? items[0].popularity : null;
+      band.image = items[0].images.length > 0 ? items[0].images[0].url : null;
+      return band;
     });
 }
 
 /**
  * Retrieve artist album count
  */
-exports.getAlbumCount = (artistTitle) => {
+exports.getAlbumCount = (slug) => {
+  const band = bandService.getBandBySlug(slug);
   return getSpotifyAccessToken()
     .then((spotifyApi) => {
-      return spotifyApi.searchArtists(artistTitle)
+      return spotifyApi.searchArtists(band.title)
         .then((data) => {
           const items = data.body.artists.items;
           return items.length > 0 ? items[0].uri.split(':')[2] : null;

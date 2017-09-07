@@ -8,6 +8,7 @@
  */
 
 const Twitter = require('twitter');
+const bandService = require('./band.service.js');
 
 function getTwitterClient()
 {
@@ -20,13 +21,14 @@ function getTwitterClient()
 }
 
 /**
- * Retrieve tweets
+ * Retrieve tweets for a band
  */
-exports.getTweets = (search) => {
+exports.getTweets = (slug) => {
+  const band = bandService.getBandBySlug(slug);
   const client = getTwitterClient();
   const params = {
     count: 3,
-    q: search,
+    q: band.title,
     lang: 'fr'
   };
   return client.get('search/tweets', params).then((data) => {

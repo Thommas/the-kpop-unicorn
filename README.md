@@ -37,6 +37,10 @@ npm install
 
 Edit files with your local configuration.
 
+#### Documentation
+
+npm run doc
+
 #### Develop
 
 npm start

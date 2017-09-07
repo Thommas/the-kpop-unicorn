@@ -12,8 +12,17 @@ const util = require('util');
 const twitterService = require('../services/twitter.service.js');
 
 exports.setup = (app) => {
+  /**
+   * Get tweets
+   *
+   * @api {get} /api/twitter Get tweets
+   * @apiGroup Twitter
+   * @apiName GetTweets
+   * @apiParam {String} slug Band slug
+   * @apiSuccess {Object[]} - List of tweets
+   */
   const getTweets = (req, res) => {
-    res.promise(twitterService.getTweets(req.query.q));
+    res.promise(twitterService.getTweets(req.params.slug));
   };
-  app.get('/api/twitter', getTweets);
+  app.get('/api/twitter/:slug', getTweets);
 }

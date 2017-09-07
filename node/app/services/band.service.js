@@ -150,17 +150,19 @@ exports.getBand = (slug) => {
   if (cachedBand) {
     return Promise.resolve(cachedBand);
   }
-  
+
   const promises = [];
 
   promises.push(twitterService.getTweets(band.title));
   promises.push(spotifyService.getAlbumCount(band.title));
   promises.push(nautiljonService.getAlbumCount(band.slug));
+  promises.push(nautiljonService.getSongCount(band.slug));
 
   return Promise.all(promises).then((data) => {
     band.tweets = data[0];
     band.spotify_album_count = data[1];
     band.nautiljon_album_count = data[2];
+    band.nautiljon_song_count = data[3];
     cacheService.set(cacheKey, band);
     return band;
   });

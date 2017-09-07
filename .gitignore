@@ -6,3 +6,5 @@
 
 /react/node_modules
 /react/.env*.local
+
+/docs/*
