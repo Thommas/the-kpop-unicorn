@@ -32,9 +32,9 @@ exports.setup = (app) => {
   app.get('/api/spotify/artist/:slug', getArtist);
 
   /**
-   * Retrieves album count
+   * Get album count
    *
-   * @api {get} /api/spotify/album-count/:slug Retrieves album count
+   * @api {get} /api/spotify/album-count/:slug Get album count
    * @apiGroup Spotify
    * @apiName GetAlbumCount
    * @apiParam {String} slug Band slug
@@ -44,4 +44,18 @@ exports.setup = (app) => {
     res.promise(spotifyService.getAlbumCount(req.params.slug));
   };
   app.get('/api/spotify/album-count/:slug', getAlbumCount);
+
+  /**
+   * Get song count
+   *
+   * @api {get} /api/spotify/song-count/:slug Get song count
+   * @apiGroup Spotify
+   * @apiName GetSongCount
+   * @apiParam {String} slug Band slug
+   * @apiSuccess {Number} Song count.
+   */
+  const getSongCount = (req, res) => {
+    res.promise(spotifyService.getSongCount(req.params.slug));
+  };
+  app.get('/api/spotify/song-count/:slug', getSongCount);
 }

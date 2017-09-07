@@ -29,11 +29,7 @@ export class BandShowComponent extends Component {
     };
   }
 
-  getAlbumPercentage(data) {
-    return Math.round(data.spotify_album_count / data.nautiljon_album_count * 100, 2);
-  }
-
-  getAlbumPercentageColor(percentage) {
+  getPercentageColor(percentage) {
     if (percentage < 10) {
       return 'red';
     } else if (percentage >= 10 && percentage < 50) {
@@ -48,8 +44,10 @@ export class BandShowComponent extends Component {
   componentDidMount() {
     const nodeApiService = new NodeApiService();
     nodeApiService.getData(`/api/band/${this.props.match.params.slug}`).then((data) => {
-      data.album_percentage = this.getAlbumPercentage(data);
-      data.album_percentage_color = this.getAlbumPercentageColor(data.album_percentage);
+      data.album_percentage = Math.round(data.spotify_album_count / data.nautiljon_album_count * 100, 2);
+      data.album_percentage_color = this.getPercentageColor(data.album_percentage);
+      data.song_percentage = Math.round(data.spotify_song_count / data.nautiljon_song_count * 100, 2);
+      data.song_percentage_color = this.getPercentageColor(data.song_percentage);
       this.setState({data: data})
     });
   }
@@ -83,18 +81,40 @@ export class BandShowComponent extends Component {
           <Statistic.Group widths='four'>
             <Statistic inverted>
               <Statistic.Value>{this.state.data.spotify_album_count}</Statistic.Value>
-              <Statistic.Label>Albums on Spotify</Statistic.Label>
+              <Statistic.Label>Spotify</Statistic.Label>
             </Statistic>
             <Statistic inverted>
               <Statistic.Value>10</Statistic.Value>
-              <Statistic.Label>Albums on MusixMatch</Statistic.Label>
+              <Statistic.Label>MusixMatch</Statistic.Label>
             </Statistic>
             <Statistic inverted>
               <Statistic.Value>{this.state.data.nautiljon_album_count}</Statistic.Value>
-              <Statistic.Label>Albums on Nautiljon</Statistic.Label>
+              <Statistic.Label>Nautiljon</Statistic.Label>
             </Statistic>
             <Statistic inverted color={this.state.data.album_percentage_color}>
               <Statistic.Value>{this.state.data.album_percentage}%</Statistic.Value>
+              <Statistic.Label>Digital presence score</Statistic.Label>
+            </Statistic>
+          </Statistic.Group>
+        </Segment>
+
+        <h3>Songs</h3>
+        <Segment inverted>
+          <Statistic.Group widths='four'>
+            <Statistic inverted>
+              <Statistic.Value>{this.state.data.spotify_song_count}</Statistic.Value>
+              <Statistic.Label>Spotify</Statistic.Label>
+            </Statistic>
+            <Statistic inverted>
+              <Statistic.Value>10</Statistic.Value>
+              <Statistic.Label>MusixMatch</Statistic.Label>
+            </Statistic>
+            <Statistic inverted>
+              <Statistic.Value>{this.state.data.nautiljon_song_count}</Statistic.Value>
+              <Statistic.Label>Nautiljon</Statistic.Label>
+            </Statistic>
+            <Statistic inverted color={this.state.data.song_percentage_color}>
+              <Statistic.Value>{this.state.data.song_percentage}%</Statistic.Value>
               <Statistic.Label>Digital presence score</Statistic.Label>
             </Statistic>
           </Statistic.Group>

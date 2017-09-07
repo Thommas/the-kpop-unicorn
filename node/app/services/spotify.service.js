@@ -73,3 +73,17 @@ exports.getAlbumCount = (slug) => {
         });
     })
 }
+
+/**
+ * Retrieve artist song count
+ */
+exports.getSongCount = (slug) => {
+  const band = bandService.getBandBySlug(slug);
+  return getSpotifyAccessToken()
+    .then((spotifyApi) => {
+      return spotifyApi.searchTracks(`artist:${band.title}`)
+        .then((data) => {
+          return data.body.tracks.total;
+        });
+    })
+}

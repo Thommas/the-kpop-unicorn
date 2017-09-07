@@ -41,7 +41,7 @@ exports.setup = (app) => {
    * @apiSuccess {Number} nautiljon_song_count Song count on Nautiljon
    */
   const getBand = (req, res) => {
-    res.promise(bandService.getBand(req.params.title));
+    res.promise(bandService.getBand(req.params.slug));
   };
-  app.get('/api/band/:title', getBand);
+  app.get('/api/band/:slug', getBand);
 }

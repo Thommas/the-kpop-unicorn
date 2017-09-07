@@ -111,7 +111,7 @@ exports.getBands = (sort) => {
 
   const promises = [];
   _.forEach(STATIC_BANDS_DATA, (artist) => {
-    promises.push(spotifyService.getArtist(artist.title));
+    promises.push(spotifyService.getArtist(artist.slug));
   });
   return Promise.all(promises).then((spotifyBands) => {
     let bands = _.merge(STATIC_BANDS_DATA, spotifyBands);
@@ -153,16 +153,18 @@ exports.getBand = (slug) => {
 
   const promises = [];
 
-  promises.push(twitterService.getTweets(band.title));
-  promises.push(spotifyService.getAlbumCount(band.title));
+  promises.push(twitterService.getTweets(band.slug));
+  promises.push(spotifyService.getAlbumCount(band.slug));
   promises.push(nautiljonService.getAlbumCount(band.slug));
+  promises.push(spotifyService.getSongCount(band.slug));
   promises.push(nautiljonService.getSongCount(band.slug));
 
   return Promise.all(promises).then((data) => {
     band.tweets = data[0];
     band.spotify_album_count = data[1];
     band.nautiljon_album_count = data[2];
-    band.nautiljon_song_count = data[3];
+    band.spotify_song_count = data[3];
+    band.nautiljon_song_count = data[4];
     cacheService.set(cacheKey, band);
     return band;
   });
