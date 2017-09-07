@@ -8,9 +8,10 @@
  */
 
 const _ = require('lodash');
+const cacheService = require('./cache.service.js');
 const spotifyService = require('./spotify.service.js');
 const twitterService = require('./twitter.service.js');
-const cacheService = require('./cache.service.js');
+const nautiljonService = require('./nautiljon.service.js');
 
 const CACHED_BANDS_KEY = 'cached_bands';
 const CACHED_BAND_KEY = 'cached_band';
@@ -123,9 +124,9 @@ exports.getBands = (sort) => {
 }
 
 /**
- * Retrieve band
+ * Retrieve band by slug
  */
-exports.getBand = (slug) => {
+exports.getBandBySlug = (slug) => {
   const band = _.find(STATIC_BANDS_DATA, (artist) => {
     return artist.slug === slug;
   })
@@ -135,21 +136,31 @@ exports.getBand = (slug) => {
       'message': 'Band not found'
     };
   }
+  return band;
+}
+
+/**
+ * Retrieve band
+ */
+exports.getBand = (slug) => {
+  const band = exports.getBandBySlug(slug);
 
   const cacheKey = `${CACHED_BAND_KEY}_${slug}`;
   const cachedBand = cacheService.get(cacheKey);
   if (cachedBand) {
     return Promise.resolve(cachedBand);
   }
-
+  
   const promises = [];
 
   promises.push(twitterService.getTweets(band.title));
   promises.push(spotifyService.getAlbumCount(band.title));
+  promises.push(nautiljonService.getAlbumCount(band.slug));
 
   return Promise.all(promises).then((data) => {
     band.tweets = data[0];
-    band.album_count = data[1];
+    band.spotify_album_count = data[1];
+    band.nautiljon_album_count = data[2];
     cacheService.set(cacheKey, band);
     return band;
   });

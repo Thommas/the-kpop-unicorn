@@ -15,17 +15,11 @@ const bandService = require('./band.service.js');
 /**
  * Get album count
  */
-exports.getAlbumCount = (title) => {
-  return bandService.getBand(title)
-    .then((band) => {
-      return band.nautiljon_url;
-    })
-    .then((url) => {
-      console.log('url', url);
-      const xrayCall = x(url, '#menu_onglets_1_cd');
-      const promise = Promise.promisify(xrayCall);
-      return promise();
-    })
+exports.getAlbumCount = (slug) => {
+  const band = bandService.getBandBySlug(slug);
+  const xrayCall = x(band.nautiljon_url, '#menu_onglets_1_cd');
+  const promise = Promise.promisify(xrayCall);
+  return promise()
     .then((res) => {
       return res.replace(/[a-zA-Z\(\)]/g, '').trim();
     })

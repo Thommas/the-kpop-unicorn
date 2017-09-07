@@ -30,7 +30,7 @@ export class BandShowComponent extends Component {
   }
 
   getAlbumPercentage(data) {
-    return Math.round(data.album_count / 200 * 100, 2);
+    return Math.round(data.spotify_album_count / data.nautiljon_album_count * 100, 2);
   }
 
   getAlbumPercentageColor(percentage) {
@@ -82,7 +82,7 @@ export class BandShowComponent extends Component {
         <Segment inverted>
           <Statistic.Group widths='four'>
             <Statistic inverted>
-              <Statistic.Value>{this.state.data.album_count}</Statistic.Value>
+              <Statistic.Value>{this.state.data.spotify_album_count}</Statistic.Value>
               <Statistic.Label>Albums on Spotify</Statistic.Label>
             </Statistic>
             <Statistic inverted>
@@ -90,8 +90,8 @@ export class BandShowComponent extends Component {
               <Statistic.Label>Albums on MusixMatch</Statistic.Label>
             </Statistic>
             <Statistic inverted>
-              <Statistic.Value>200</Statistic.Value>
-              <Statistic.Label>Albums</Statistic.Label>
+              <Statistic.Value>{this.state.data.nautiljon_album_count}</Statistic.Value>
+              <Statistic.Label>Albums on Nautiljon</Statistic.Label>
             </Statistic>
             <Statistic inverted color={this.state.data.album_percentage_color}>
               <Statistic.Value>{this.state.data.album_percentage}%</Statistic.Value>
