@@ -22,6 +22,7 @@ export class BandShowComponent extends Component {
     this.state = {
       data: {
         title: null,
+        slug: null,
         tweets: [],
         album_count: 0
       }
@@ -46,7 +47,7 @@ export class BandShowComponent extends Component {
 
   componentDidMount() {
     const nodeApiService = new NodeApiService();
-    nodeApiService.getData(`/api/band/${this.props.match.params.title}`).then((data) => {
+    nodeApiService.getData(`/api/band/${this.props.match.params.slug}`).then((data) => {
       data.album_percentage = this.getAlbumPercentage(data);
       data.album_percentage_color = this.getAlbumPercentageColor(data.album_percentage);
       this.setState({data: data})
@@ -56,7 +57,7 @@ export class BandShowComponent extends Component {
   render() {
     return (
       <Container>
-        <h1>{this.props.match.params.title}</h1>
+        <h1>{this.state.data.title}</h1>
 
         <h3>Tweets</h3>
         <Grid columns='three' divided>
@@ -79,22 +80,24 @@ export class BandShowComponent extends Component {
 
         <h3>Albums</h3>
         <Segment inverted>
-          <Statistic inverted>
-            <Statistic.Value>{this.state.data.album_count}</Statistic.Value>
-            <Statistic.Label>Albums on Spotify</Statistic.Label>
-          </Statistic>
-          <Statistic inverted>
-            <Statistic.Value>10</Statistic.Value>
-            <Statistic.Label>Albums on MusixMatch</Statistic.Label>
-          </Statistic>
-          <Statistic inverted>
-            <Statistic.Value>200</Statistic.Value>
-            <Statistic.Label>Albums</Statistic.Label>
-          </Statistic>
-          <Statistic inverted color={this.state.data.album_percentage_color}>
-            <Statistic.Value>{this.state.data.album_percentage}%</Statistic.Value>
-            <Statistic.Label>Digital presence score</Statistic.Label>
-          </Statistic>
+          <Statistic.Group widths='four'>
+            <Statistic inverted>
+              <Statistic.Value>{this.state.data.album_count}</Statistic.Value>
+              <Statistic.Label>Albums on Spotify</Statistic.Label>
+            </Statistic>
+            <Statistic inverted>
+              <Statistic.Value>10</Statistic.Value>
+              <Statistic.Label>Albums on MusixMatch</Statistic.Label>
+            </Statistic>
+            <Statistic inverted>
+              <Statistic.Value>200</Statistic.Value>
+              <Statistic.Label>Albums</Statistic.Label>
+            </Statistic>
+            <Statistic inverted color={this.state.data.album_percentage_color}>
+              <Statistic.Value>{this.state.data.album_percentage}%</Statistic.Value>
+              <Statistic.Label>Digital presence score</Statistic.Label>
+            </Statistic>
+          </Statistic.Group>
         </Segment>
       </Container>
     )

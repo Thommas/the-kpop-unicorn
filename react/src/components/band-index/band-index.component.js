@@ -38,22 +38,22 @@ export class BandIndexComponent extends Component {
       <Container>
         <h1>Kpop bands</h1>
         <Card.Group itemsPerRow={4}>
-          { this.state.data.map((item) => (
-            <Card key={item.title}>
-              <Image src={item.image} size='small' wrapped/>
+          { this.state.data.map((band) => (
+            <Card key={band.title}>
+              <Image src={band.image} size='small' wrapped/>
               <Card.Content>
                 <Card.Header>
-                  {item.title}
+                  {band.title}
                 </Card.Header>
               </Card.Content>
               <Card.Content extra>
                 <Button
                   content='See more'
                   icon='empty star'
-                  label={{ basic: true, pointing: 'right', content: item.popularity }}
+                  label={{ basic: true, pointing: 'right', content: band.popularity }}
                   labelPosition='left'
                   as={Link}
-                  to={`/band/${item.title}`}
+                  to={`/band/${band.slug}`}
                 />
               </Card.Content>
             </Card>

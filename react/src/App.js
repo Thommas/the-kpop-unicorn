@@ -68,7 +68,7 @@ export default class App extends React.Component {
               <Route exact path='/' component={HomeComponent}/>
               <Route path='/ranking' component={RankingComponent}/>
               <Route exact path='/band' component={BandIndexComponent}/>
-              <Route path='/band/:title' component={BandShowComponent}/>
+              <Route path='/band/:slug' component={BandShowComponent}/>
               <Route path='/hall' component={HallComponent}/>
             </main>
             <FooterComponent></FooterComponent>

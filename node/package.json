@@ -25,7 +25,8 @@
     "lru-cache": "^4.1.1",
     "moment": "^2.15.1",
     "spotify-web-api-node": "^2.5.0",
-    "twitter": "^1.7.1"
+    "twitter": "^1.7.1",
+    "x-ray": "^2.3.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",

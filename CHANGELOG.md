@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Added
 - Band detail page will display combined data from multiple APIs
 - Cache service to minimize API calls
+- Scraped data from Nautiljon to get the best accuracy of album count
+- Added static slug to better query bands
 
 ### React Frontend
 #### Improved
