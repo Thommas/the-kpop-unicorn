@@ -6,16 +6,42 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+const proxyquire = require('proxyquire').noCallThru();
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 chai.should();
 chai.use(chaiAsPromised);
 const expect = chai.expect;
-const bandService = require('./band.service.js');
-const environmentService = require('./environment.service');
-environmentService.setup();
 
 describe('services/band.service.js', () => {
+  let bandService;
+
+  before(() => {
+    let spotifyServiceStub = {
+      getArtist: (slug) => {return {slug: slug, image: 'test', popularity: 42};},
+      getAlbumCount: (slug) => {return 42;},
+      getSongCount: (slug) => {return 42;}
+    };
+    let musixmatchServiceStub = {
+      getAlbumCount: (slug) => {return 42;},
+      getSongCount: (slug) => {return 42;}
+    };
+    let nautiljonServiceStub = {
+      getAlbumCount: (slug) => {return 42;},
+      getSongCount: (slug) => {return 42;}
+    };
+    let twitterServiceStub = {
+      getTweets: (slug) => {return [{tweet: 'test'}];}
+    };
+
+    bandService = proxyquire('./band.service', {
+      './spotify.service.js': spotifyServiceStub,
+      './musixmatch.service.js': musixmatchServiceStub,
+      './nautiljon.service.js': nautiljonServiceStub,
+      './twitter.service.js': twitterServiceStub
+    });
+  });
+
   it('getBands', () => {
     const promise = bandService.getBands();
     return Promise.all([
