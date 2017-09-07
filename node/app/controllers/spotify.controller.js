@@ -38,7 +38,7 @@ exports.setup = (app) => {
    * @apiGroup Spotify
    * @apiName GetAlbumCount
    * @apiParam {String} slug Band slug
-   * @apiSuccess {Number} Album count.
+   * @apiSuccess {Number} Album count
    */
   const getAlbumCount = (req, res) => {
     res.promise(spotifyService.getAlbumCount(req.params.slug));
@@ -52,7 +52,7 @@ exports.setup = (app) => {
    * @apiGroup Spotify
    * @apiName GetSongCount
    * @apiParam {String} slug Band slug
-   * @apiSuccess {Number} Song count.
+   * @apiSuccess {Number} Song count
    */
   const getSongCount = (req, res) => {
     res.promise(spotifyService.getSongCount(req.params.slug));

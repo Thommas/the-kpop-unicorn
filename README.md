@@ -49,11 +49,15 @@ Access the API here: http://localhost:[PORT]
 
 #### Test
 
-npm run test
+Check carefully environments/environment.test variables.
 
-Code coverage
+Run tests:
 
-npm run coverage
+    npm run test
+
+Generate code coverage html files:
+
+    npm run coverage
 
 #### Production
 

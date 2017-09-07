@@ -11,11 +11,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Cache service to minimize API calls
 - Scraped data from Nautiljon to get the best accuracy of album count
 - Added static slug to better query bands
+- Added Musixmatch data
 
 ### React Frontend
 #### Improved
 - Home with i18n and link to ranking
 - Ranking and band index use a different sort criteria
+- Added more data to band view
 
 
 ## [0.1.0] - 2017-09-06

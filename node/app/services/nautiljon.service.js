@@ -21,7 +21,7 @@ exports.getAlbumCount = (slug) => {
   const promise = Promise.promisify(xrayCall);
   return promise()
     .then((res) => {
-      return res.replace(/[a-zA-Z\(\)]/g, '').trim();
+      return +res.replace(/[a-zA-Z\(\)]/g, '').trim();
     })
     .catch((err) => {
       console.log(err)
@@ -38,7 +38,7 @@ exports.getSongCount = (slug) => {
   const promise = Promise.promisify(xrayCall);
   return promise()
     .then((res) => {
-      return res.replace(/[a-zA-Z\(\)]/g, '').trim();
+      return +res.replace(/[a-zA-Z\(\)]/g, '').trim();
     })
     .catch((err) => {
       console.log(err)

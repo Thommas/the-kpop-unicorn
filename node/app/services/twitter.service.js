@@ -28,7 +28,7 @@ exports.getTweets = (slug) => {
   const client = getTwitterClient();
   const params = {
     count: 3,
-    q: band.title,
+    q: `${band.title}`,
     lang: 'fr'
   };
   return client.get('search/tweets', params).then((data) => {

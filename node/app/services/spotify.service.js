@@ -65,7 +65,6 @@ exports.getAlbumCount = (slug) => {
           return items.length > 0 ? items[0].uri.split(':')[2] : null;
         })
         .then((artistSpotifyID) => {
-          console.log('artistSpotifyID', artistSpotifyID);
           return spotifyApi.getArtistAlbums(artistSpotifyID);
         })
         .then((data) => {

@@ -10,7 +10,8 @@
     "doc": "npm run doc-api && npm run doc-node",
     "doc-api": "./node_modules/apidoc/bin/apidoc -i app/ -o ../docs/node-api/",
     "doc-node": "./node_modules/documentation/bin/documentation.js build app/** -f html -o ../docs/node/",
-    "test": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 mocha 'test/**/*.js'",
+    "test": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 mocha 'app/**/*.spec.js'",
+    "e2e": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 mocha 'e2e/**/*.spec.js'",
     "coverage": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 istanbul cover  --dir '../docs/node-code-coverage' node_modules/mocha/bin/_mocha 'test/**/*.js'"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "cors": "^2.8.1",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
+    "google-trends-api": "^4.2.1",
     "lodash": "^4.16.2",
     "lru-cache": "^4.1.1",
     "moment": "^2.15.1",
@@ -29,11 +31,12 @@
     "x-ray": "^2.3.2"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.1.0",
     "apidoc": "^0.17.4",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^7.1.1",
     "documentation": "^4.0.0-beta.18",
     "istanbul": "^0.4.5",
+    "mocha": "^3.1.0",
     "supertest": "^2.0.0"
   },
   "apidoc": {

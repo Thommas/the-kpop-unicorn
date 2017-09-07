@@ -44,11 +44,15 @@ export class BandShowComponent extends Component {
   componentDidMount() {
     const nodeApiService = new NodeApiService();
     nodeApiService.getData(`/api/band/${this.props.match.params.slug}`).then((data) => {
-      data.album_percentage = Math.round(data.spotify_album_count / data.nautiljon_album_count * 100, 2);
+      const albumAverage = (data.spotify_album_count + data.musixmatch_album_count + data.nautiljon_album_count) / 3;
+      data.album_percentage = Math.round(albumAverage / data.expected_album_count * 100, 2);
       data.album_percentage_color = this.getPercentageColor(data.album_percentage);
-      data.song_percentage = Math.round(data.spotify_song_count / data.nautiljon_song_count * 100, 2);
+
+      const songAverage = (data.spotify_song_count + data.musixmatch_song_count + data.nautiljon_song_count) / 3;
+      data.song_percentage = Math.round(songAverage / data.expected_song_count * 100, 2);
       data.song_percentage_color = this.getPercentageColor(data.song_percentage);
-      this.setState({data: data})
+
+      this.setState({data: data});
     });
   }
 
@@ -79,15 +83,15 @@ export class BandShowComponent extends Component {
         <h3>Albums</h3>
         <Segment inverted>
           <Statistic.Group widths='four'>
-            <Statistic inverted>
+            <Statistic inverted color='blue'>
               <Statistic.Value>{this.state.data.spotify_album_count}</Statistic.Value>
               <Statistic.Label>Spotify</Statistic.Label>
             </Statistic>
-            <Statistic inverted>
-              <Statistic.Value>10</Statistic.Value>
+            <Statistic inverted color='blue'>
+              <Statistic.Value>{this.state.data.musixmatch_album_count}</Statistic.Value>
               <Statistic.Label>MusixMatch</Statistic.Label>
             </Statistic>
-            <Statistic inverted>
+            <Statistic inverted color='blue'>
               <Statistic.Value>{this.state.data.nautiljon_album_count}</Statistic.Value>
               <Statistic.Label>Nautiljon</Statistic.Label>
             </Statistic>
@@ -101,20 +105,38 @@ export class BandShowComponent extends Component {
         <h3>Songs</h3>
         <Segment inverted>
           <Statistic.Group widths='four'>
-            <Statistic inverted>
+            <Statistic inverted color='blue'>
               <Statistic.Value>{this.state.data.spotify_song_count}</Statistic.Value>
               <Statistic.Label>Spotify</Statistic.Label>
             </Statistic>
-            <Statistic inverted>
-              <Statistic.Value>10</Statistic.Value>
+            <Statistic inverted color='blue'>
+              <Statistic.Value>{this.state.data.musixmatch_song_count}</Statistic.Value>
               <Statistic.Label>MusixMatch</Statistic.Label>
             </Statistic>
-            <Statistic inverted>
+            <Statistic inverted color='blue'>
               <Statistic.Value>{this.state.data.nautiljon_song_count}</Statistic.Value>
               <Statistic.Label>Nautiljon</Statistic.Label>
             </Statistic>
             <Statistic inverted color={this.state.data.song_percentage_color}>
               <Statistic.Value>{this.state.data.song_percentage}%</Statistic.Value>
+              <Statistic.Label>Digital presence score</Statistic.Label>
+            </Statistic>
+          </Statistic.Group>
+        </Segment>
+
+        <h3>Social</h3>
+        <Segment inverted>
+          <Statistic.Group widths='three'>
+            <Statistic inverted color='blue'>
+              <Statistic.Value>42</Statistic.Value>
+              <Statistic.Label>Google</Statistic.Label>
+            </Statistic>
+            <Statistic inverted color='blue'>
+              <Statistic.Value>42</Statistic.Value>
+              <Statistic.Label>Twitter</Statistic.Label>
+            </Statistic>
+            <Statistic inverted>
+              <Statistic.Value>42%</Statistic.Value>
               <Statistic.Label>Digital presence score</Statistic.Label>
             </Statistic>
           </Statistic.Group>

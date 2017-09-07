@@ -8,6 +8,7 @@
  */
 
 const axios = require('axios');
+const bandService = require('./band.service.js');
 
 const MUSIXMATCH_API_URL = 'http://api.musixmatch.com/ws/1.1';
 
@@ -17,13 +18,49 @@ function insertApiKey(url)
 }
 
 /**
- * Search artist by name
+ * Get artist id
  */
-exports.searchArtist = (search) => {
-  const url = `${MUSIXMATCH_API_URL}/track.search?q_artist=${search}&page_size=10&page=1&s_track_rating=desc`;
+exports.getArtistId = (slug) => {
+  const band = bandService.getBandBySlug(slug);
+  const url = `${MUSIXMATCH_API_URL}/artist.search?q_artist=${band.title}&page_size=1`;
   return axios.get(insertApiKey(url))
     .then((response) => {
-      return response.data;
+      const list = response.data.message.body.artist_list;
+      return list.length > 0 ? list[0].artist.artist_id : null;
+    })
+    .catch((error) => {
+      console.log(error);
+      // TODO: Log error somewhere
+    });
+}
+
+/**
+ * Get album count
+ */
+exports.getAlbumCount = (slug) => {
+  return exports.getArtistId(slug)
+    .then((artistID) => {
+      const url = `${MUSIXMATCH_API_URL}/artist.albums.get?artist_id=${artistID}&s_release_date=desc&g_album_name=1`;
+      return axios.get(insertApiKey(url));
+    })
+    .then((response) => {
+      return response.data.message.header.available;
+    })
+    .catch((error) => {
+      console.log(error);
+      // TODO: Log error somewhere
+    });
+}
+
+/**
+ * Get song count
+ */
+exports.getSongCount = (slug) => {
+  const band = bandService.getBandBySlug(slug);
+  const url = `${MUSIXMATCH_API_URL}/track.search?q_artist=${band.title}&page_size=1&page=1&s_track_rating=desc`;
+  return axios.get(insertApiKey(url))
+    .then((response) => {
+      return response.data.message.header.available;
     })
     .catch((error) => {
       console.log(error);

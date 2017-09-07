@@ -15,7 +15,7 @@ exports.setup = (app) => {
   /**
    * Get tweets
    *
-   * @api {get} /api/twitter Get tweets
+   * @api {get} /api/twitter/:slug Get tweets
    * @apiGroup Twitter
    * @apiName GetTweets
    * @apiParam {String} slug Band slug
