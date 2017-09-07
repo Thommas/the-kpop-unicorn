@@ -1,3 +1,10 @@
 {
-  "nav.home": "Home"
+  "nav.home": "Home",
+  "nav.ranking": "Ranking",
+  "nav.band": "Band",
+  "nav.hall": "Hall",
+  "home.header1.title": "A selection of the most popular kpop bands according to French kpop fans",
+  "home.header1.description": "Display metrics to gauge each band popularity in France",
+  "home.header2.title": "Digital presence in western public APIs compared to the reality in Korea",
+  "home.header2.description": "Based on popularity match potential concert halls in France they could perform at"
 }

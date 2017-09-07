@@ -17,6 +17,7 @@ import {
   HomeComponent,
   RankingComponent,
   BandIndexComponent,
+  BandShowComponent,
   HallComponent,
   NavComponent,
   FooterComponent
@@ -66,7 +67,8 @@ export default class App extends React.Component {
             <main className='app-content'>
               <Route exact path='/' component={HomeComponent}/>
               <Route path='/ranking' component={RankingComponent}/>
-              <Route path='/band' component={BandIndexComponent}/>
+              <Route exact path='/band' component={BandIndexComponent}/>
+              <Route path='/band/:title' component={BandShowComponent}/>
               <Route path='/hall' component={HallComponent}/>
             </main>
             <FooterComponent></FooterComponent>

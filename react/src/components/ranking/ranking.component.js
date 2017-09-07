@@ -8,13 +8,15 @@
 
 import React, { Component } from 'react'
 import {
+  Button,
   Container,
   Image,
   Card,
-  Icon,
 } from 'semantic-ui-react'
-
-const src = 'http://placehold.it/150x150';
+import {
+  Link
+} from 'react-router-dom'
+import NodeApiService from '../../services/node-api.service.js';
 
 export class RankingComponent extends Component {
   constructor(props) {
@@ -25,37 +27,34 @@ export class RankingComponent extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      data: ['snsd', 'exo']
+    const nodeApiService = new NodeApiService();
+    nodeApiService.getData('/api/bands?sort=popularity').then((data) => {
+      this.setState({data: data})
     });
   }
 
   render() {
     return (
       <Container>
-        <h1>Popularity Ranking</h1>
+        <h1>Popularity ranking</h1>
         <Card.Group itemsPerRow={4}>
           { this.state.data.map((item) => (
-            <Card key={item}>
-              <Image src={src} />
+            <Card key={item.title}>
+              <Image src={item.image} size='small' wrapped/>
               <Card.Content>
                 <Card.Header>
-                  {item}
+                  {item.title}
                 </Card.Header>
-                <Card.Meta>
-                  <span className='date'>
-                    Joined in 2015
-                  </span>
-                </Card.Meta>
-                <Card.Description>
-                  XXX
-                </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <a>
-                  <Icon name='user' />
-                  22 Friends
-                </a>
+                <Button
+                  content='See more'
+                  icon='empty star'
+                  label={{ basic: true, pointing: 'right', content: item.popularity }}
+                  labelPosition='left'
+                  as={Link}
+                  to={`/band/${item.title}`}
+                />
               </Card.Content>
             </Card>
           ))}

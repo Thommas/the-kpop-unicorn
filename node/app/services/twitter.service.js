@@ -25,7 +25,11 @@ function getTwitterClient()
 exports.getTweets = (search) => {
   const client = getTwitterClient();
   const params = {
-    screen_name: search
+    count: 3,
+    q: search,
+    lang: 'fr'
   };
-  return client.get('statuses/user_timeline', params);
+  return client.get('search/tweets', params).then((data) => {
+    return data.statuses;
+  });
 }

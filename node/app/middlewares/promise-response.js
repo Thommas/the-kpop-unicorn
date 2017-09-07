@@ -21,7 +21,11 @@ module.exports = (req, res, next) => {
   res.promise = (promise) => {
     promise
       .then(data => {
-        res.send(data);
+        if (typeof(data) === 'number') {
+          res.send(data.toString());
+        } else {
+          res.send(data);
+        }
       })
       .catch(err => {
         loggerService.logError(req, err);

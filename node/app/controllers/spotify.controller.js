@@ -16,4 +16,9 @@ exports.setup = (app) => {
     res.promise(spotifyService.getArtist(req.query.q));
   };
   app.get('/api/spotify/artist', getArtist);
+
+  const getAlbumCount = (req, res) => {
+    res.promise(spotifyService.getAlbumCount(req.params.title));
+  };
+  app.get('/api/spotify/artist/album-count/:title', getAlbumCount);
 }

@@ -9,6 +9,7 @@
 
 const _ = require('lodash');
 const spotifyService = require('./spotify.service.js');
+const twitterService = require('./twitter.service.js');
 
 const STATIC_BANDS_DATA = [
   {
@@ -64,10 +65,33 @@ const STATIC_BANDS_DATA = [
 /**
  * Retrieve bands
  */
-exports.getBands = () => {
+exports.getBands = (sort) => {
   const promises = [];
   _.forEach(STATIC_BANDS_DATA, (artist) => {
     promises.push(spotifyService.getArtist(artist.title));
   });
-  return Promise.all(promises);
+  return Promise.all(promises).then((artists) => {
+    if (sort) {
+      artists = _.sortBy(artists, 'popularity').reverse();
+    }
+    return artists;
+  });
+}
+
+/**
+ * Retrieve band
+ */
+exports.getBand = (title) => {
+  const promises = [];
+
+  promises.push(twitterService.getTweets(title));
+  promises.push(spotifyService.getAlbumCount(title));
+
+  return Promise.all(promises).then((data) => {
+    return {
+      title: title,
+      tweets: data[0],
+      album_count: data[1]
+    };
+  });
 }

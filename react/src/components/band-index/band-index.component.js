@@ -8,11 +8,14 @@
 
 import React, { Component } from 'react'
 import {
+  Button,
   Container,
   Image,
   Card,
-  Icon,
 } from 'semantic-ui-react'
+import {
+  Link
+} from 'react-router-dom'
 import NodeApiService from '../../services/node-api.service.js';
 
 export class BandIndexComponent extends Component {
@@ -44,10 +47,14 @@ export class BandIndexComponent extends Component {
                 </Card.Header>
               </Card.Content>
               <Card.Content extra>
-                <a>
-                  <Icon name='spotify' />
-                  {item.popularity}
-                </a>
+                <Button
+                  content='See more'
+                  icon='empty star'
+                  label={{ basic: true, pointing: 'right', content: item.popularity }}
+                  labelPosition='left'
+                  as={Link}
+                  to={`/band/${item.title}`}
+                />
               </Card.Content>
             </Card>
           ))}

@@ -20,12 +20,10 @@ import './nav.component.css';
 export const NavComponent = () => (
   <Menu size='large'>
     <Container>
-      <Menu.Item as={Link} to='/'>
-        <FormattedMessage id='nav.home'/>
-      </Menu.Item>
-      <Menu.Item as={Link} to='/ranking'>Popularity ranking</Menu.Item>
-      <Menu.Item as={Link} to='/band'>Kpop bands</Menu.Item>
-      <Menu.Item as={Link} to='/hall'>Concert halls</Menu.Item>
+      <Menu.Item as={Link} to='/'><FormattedMessage id='nav.home'/></Menu.Item>
+      <Menu.Item as={Link} to='/ranking'><FormattedMessage id='nav.ranking'/></Menu.Item>
+      <Menu.Item as={Link} to='/band'><FormattedMessage id='nav.band'/></Menu.Item>
+      <Menu.Item as={Link} to='/hall'><FormattedMessage id='nav.hall'/></Menu.Item>
     </Container>
   </Menu>
 )
