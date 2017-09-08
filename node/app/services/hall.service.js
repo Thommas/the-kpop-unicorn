@@ -7,6 +7,8 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+const _ = require('lodash');
+
 const STATIC_HALLS_DATA = [
   {
     'title': 'Parc des Princes',
@@ -45,16 +47,16 @@ const STATIC_HALLS_DATA = [
     'score_required': 42
   },
   {
-    'title': 'La Salle Pleyel',
-    'seats': 1913,
-    'img': 'http://placehold.it/64x64',
-    'score_required': 37
-  },
-  {
     'title': 'Elysée Montmartre',
     'seats': 2000,
     'img': 'http://placehold.it/64x64',
     'score_required': 40
+  },
+  {
+    'title': 'La Salle Pleyel',
+    'seats': 1913,
+    'img': 'http://placehold.it/64x64',
+    'score_required': 37
   },
   {
     'title': 'Bataclan',
@@ -155,8 +157,21 @@ const STATIC_HALLS_DATA = [
 ];
 
 /**
- * Retrieve halls
+ * Get halls
  */
 exports.getHalls = () => {
   return Promise.resolve(STATIC_HALLS_DATA);
+}
+
+/**
+ * Get hall based on band score
+ */
+exports.getHall = (score) => {
+  const hall = _.findLast(STATIC_HALLS_DATA, (band) => {
+    return band.score_required > score
+  });
+  if (hall) {
+    return hall;
+  }
+  return STATIC_HALLS_DATA[0];
 }

@@ -21,6 +21,23 @@ function getTwitterClient()
 }
 
 /**
+ * Get score based on last month tweets count
+ */
+exports.getScore = (slug) => {
+  const band = bandService.getBandBySlug(slug);
+  const client = getTwitterClient();
+  const params = {
+    count: 9999,
+    q: `${band.title} #kpop`,
+    lang: 'fr',
+    include_entities: false
+  };
+  return client.get('search/tweets', params).then((data) => {
+    return data.statuses.length;
+  });
+}
+
+/**
  * Retrieve tweets for a band
  */
 exports.getTweets = (slug) => {

@@ -13,16 +13,16 @@ const googleTrendsService = require('../services/google-trends.service.js');
 
 exports.setup = (app) => {
   /**
-   * Get trends
+   * Get trends score
    *
-   * @api {get} /api/google-trends/:slug Get trends
+   * @api {get} /api/google-trends/score/:slug Get trends
    * @apiGroup GoogleTrends
-   * @apiName GetTrends
+   * @apiName GetGoogleTrendsScore
    * @apiParam {String} slug Band slug
    * @apiSuccess {Object[]} - List of trends
    */
-  const getTrends = (req, res) => {
-    res.promise(googleTrendsService.getTrends(req.params.slug));
+  const getScore = (req, res) => {
+    res.promise(googleTrendsService.getScore(req.params.slug));
   };
-  app.get('/api/google-trends/:slug', getTrends);
+  app.get('/api/google-trends/score/:slug', getScore);
 }

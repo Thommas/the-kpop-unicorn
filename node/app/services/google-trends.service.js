@@ -7,24 +7,28 @@
  * @author Thomas Bullier <thomasbullier@gmail.com>
  */
 
+const _ = require('lodash');
+const moment = require('moment');
 const googleTrends = require('google-trends-api');
 const bandService = require('./band.service.js');
 
 /**
- * Retrieve trends
+ * Get score based on last month google trends
  */
-exports.getTrends = (slug) => {
+exports.getScore = (slug) => {
   const band = bandService.getBandBySlug(slug);
+  const now = moment();
+  const before = moment().subtract(1, 'month');
   const params = {
     keyword: band.title,
-    startTime: new Date('2017-01-01'),
-    endTime: new Date('2017-09-01')
+    startTime: before.toDate(),
+    endTime: now.toDate()
   };
   return googleTrends.interestOverTime(params)
     .then((results) => {
       const json = JSON.parse(results);
-      return json;
-      return results.default.timelineData[results.default.timelineData.length - 1].value[0];
+      const sum = _.sumBy(json.default.timelineData, (o) => { return o.value[0]; });
+      return Math.round(sum / json.default.timelineData.length);
     })
     .catch((err) => {
       console.error('Oh no there was an error', err);

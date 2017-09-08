@@ -31,14 +31,19 @@ describe('services/band.service.js', () => {
       getSongCount: (slug) => {return 42;}
     };
     let twitterServiceStub = {
-      getTweets: (slug) => {return [{tweet: 'test'}];}
+      getTweets: (slug) => {return [{tweet: 'test'}];},
+      getScore: (slug) => {return 42;}
+    };
+    let googleTrendsServiceStub = {
+      getScore: (slug) => {return 42;}
     };
 
     bandService = proxyquire('./band.service', {
       './spotify.service.js': spotifyServiceStub,
       './musixmatch.service.js': musixmatchServiceStub,
       './nautiljon.service.js': nautiljonServiceStub,
-      './twitter.service.js': twitterServiceStub
+      './twitter.service.js': twitterServiceStub,
+      './google-trends.service.js': googleTrendsServiceStub
     });
   });
 

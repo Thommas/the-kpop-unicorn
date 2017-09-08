@@ -13,6 +13,20 @@ const twitterService = require('../services/twitter.service.js');
 
 exports.setup = (app) => {
   /**
+   * Get twitter score
+   *
+   * @api {get} /api/twitter/score/:slug Get tweets
+   * @apiGroup Twitter
+   * @apiName GetTwitterScore
+   * @apiParam {String} slug Band slug
+   * @apiSuccess {Object[]} - List of tweets
+   */
+  const getScore = (req, res) => {
+    res.promise(twitterService.getScore(req.params.slug));
+  };
+  app.get('/api/twitter/score/:slug', getScore);
+
+  /**
    * Get tweets
    *
    * @api {get} /api/twitter/:slug Get tweets
