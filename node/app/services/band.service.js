@@ -14,6 +14,7 @@ const spotifyService = require('./spotify.service.js');
 const twitterService = require('./twitter.service.js');
 const nautiljonService = require('./nautiljon.service.js');
 const musixmatchService = require('./musixmatch.service.js');
+const musicbrainzService = require('./musicbrainz.service.js');
 const googleTrendsService = require('./google-trends.service.js');
 
 const CACHED_BANDS_KEY = 'cached_bands';
@@ -154,14 +155,30 @@ const STATIC_BANDS_DATA = [
  * Compute score data
  */
 function computeBandScoreData(band) {
-  const albumAverage = (band.spotify_album_count + band.musixmatch_album_count + band.nautiljon_album_count) / 3;
+  const albumAverage = (band.spotify_album_count
+    + band.musixmatch_album_count
+    + band.musicbrainz_album_count
+    + band.nautiljon_album_count) / 4;
+  
   band.album_percentage = Math.round(albumAverage / band.expected_album_count * 100, 2);
-  const songAverage = (band.spotify_song_count + band.musixmatch_song_count + band.nautiljon_song_count) / 3;
+
+  const songAverage = (band.spotify_song_count
+    + band.musixmatch_song_count
+    + band.musicbrainz_song_count
+    + band.nautiljon_song_count) / 4;
+  
   band.song_percentage = Math.round(songAverage / band.expected_song_count * 100, 2);
+
   const socialAverage = (band.google_trends_score + band.twitter_score) / 2;
+  
   band.social_percentage = Math.round(socialAverage / band.expected_social_score * 100, 2);
-  band.total_digital_score = Math.round((band.album_percentage + band.song_percentage + band.social_percentage) / 3);
+  
+  band.total_digital_score = Math.round((band.album_percentage
+    + band.song_percentage
+    + band.social_percentage) / 3);
+
   band.hall = hallService.getHall(band.total_digital_score);
+
   return band;
 }
 
@@ -223,22 +240,29 @@ exports.getBand = (slug) => {
   promises.push(spotifyService.getAlbumCount(band.slug));
   promises.push(nautiljonService.getAlbumCount(band.slug));
   promises.push(musixmatchService.getAlbumCount(band.slug));
+  promises.push(musicbrainzService.getAlbumCount(band.slug));
   promises.push(spotifyService.getSongCount(band.slug));
   promises.push(nautiljonService.getSongCount(band.slug));
   promises.push(musixmatchService.getSongCount(band.slug));
+  promises.push(musicbrainzService.getSongCount(band.slug));
   promises.push(twitterService.getScore(band.slug));
   promises.push(googleTrendsService.getScore(band.slug));
 
   return Promise.all(promises).then((data) => {
     band.tweets = data[0];
+
     band.spotify_album_count = data[1];
     band.nautiljon_album_count = data[2];
     band.musixmatch_album_count = data[3];
-    band.spotify_song_count = data[4];
-    band.nautiljon_song_count = data[5];
-    band.musixmatch_song_count = data[6];
-    band.twitter_score = data[7];
-    band.google_trends_score = data[8];
+    band.musicbrainz_album_count = data[4];
+
+    band.spotify_song_count = data[5];
+    band.nautiljon_song_count = data[6];
+    band.musixmatch_song_count = data[7];
+    band.musicbrainz_song_count = data[8];
+
+    band.twitter_score = data[9];
+    band.google_trends_score = data[10];
     
     band = computeBandScoreData(band);
 

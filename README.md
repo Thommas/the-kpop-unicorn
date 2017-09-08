@@ -2,6 +2,7 @@ The Kpop Unicorn
 ================
 
 Author: Thomas Bullier <thomasbullier@gmail.com>
+
 Description: Mini Music Hack Day for kpop fans.
 
 Features:
@@ -20,14 +21,8 @@ React
 
 ## Node API
 
-cd node
-npm install
-
-#### Generate self signed certificate
-
-    mkdir -p ssl
-    openssl genrsa 1024 > ssl/server.key
-    openssl req -new -x509 -nodes -sha1 -days 365 -key ssl/server.key -out ssl/server.crt
+    cd node
+    npm install
 
 #### Setup environments
 
@@ -39,11 +34,11 @@ Edit files with your local configuration.
 
 #### Documentation
 
-npm run doc
+    npm run doc
 
 #### Develop
 
-npm start
+    npm start
 
 Access the API here: http://localhost:[PORT]
 
@@ -61,21 +56,23 @@ Generate code coverage html files:
 
 #### Production
 
-In environments/environment.prod, put the absolute path to self signed certificate:
+Use letsencrypt to get a valid HTTPS/SSL certificate.
+
+In environments/environment.prod, put the absolute path to certificate:
 
     SSL_CERT=/[path]/ssl/server.crt
     SSL_KEY=/[path]/ssl/server.key
 
 npm run prod
 
-Access the API here: https://localhost:[PORT]
+Access the API here: https://[PRODUCTION_URL]:[PORT]
 
 
 ## React frontend
 
-cd react
-npm install
+    cd react
+    npm install
 
 #### Develop
 
-npm start
+    npm start

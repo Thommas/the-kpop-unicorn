@@ -5,3 +5,5 @@ export * from './hall/hall.component.js';
 export * from './home/home.component.js';
 export * from './nav/nav.component.js';
 export * from './ranking/ranking.component.js';
+export * from './shared/node-api-error/node-api-error.component.js';
+export * from './shared/node-api-loader/node-api-loader.component.js';

@@ -26,6 +26,10 @@ describe('services/band.service.js', () => {
       getAlbumCount: (slug) => {return 42;},
       getSongCount: (slug) => {return 42;}
     };
+    let musicbrainzServiceStub = {
+      getAlbumCount: (slug) => {return 42;},
+      getSongCount: (slug) => {return 42;}
+    };
     let nautiljonServiceStub = {
       getAlbumCount: (slug) => {return 42;},
       getSongCount: (slug) => {return 42;}
@@ -41,6 +45,7 @@ describe('services/band.service.js', () => {
     bandService = proxyquire('./band.service', {
       './spotify.service.js': spotifyServiceStub,
       './musixmatch.service.js': musixmatchServiceStub,
+      './musicbrainz.service.js': musicbrainzServiceStub,
       './nautiljon.service.js': nautiljonServiceStub,
       './twitter.service.js': twitterServiceStub,
       './google-trends.service.js': googleTrendsServiceStub

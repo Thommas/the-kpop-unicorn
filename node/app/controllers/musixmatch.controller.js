@@ -15,9 +15,9 @@ exports.setup = (app) => {
   /**
    * Get artist data
    *
-   * @api {get} /api/musixmatch/artist/:slug Get artist data
+   * @api {get} /api/musixmatch/artist-id/:slug Get artist data
    * @apiGroup Musixmatch
-   * @apiName GetArtist
+   * @apiName GetArtistId
    * @apiParam {String} slug Band slug
    */
   const getArtistId = (req, res) => {

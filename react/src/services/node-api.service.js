@@ -21,8 +21,8 @@ class NodeApiService {
         return response.data
       })
       .catch((error) => {
-        console.log(error);
         // TODO: Log error somewhere
+        throw error;
       });
   }
 }

@@ -6,10 +6,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.3.0] - 2017-09-08
 ### Node API
+#### Added
+- Google trends score
+- Twitter score
+
 #### Improved
+- Computed concert hall for band based on total digital score
 
 ### React Frontend
+#### Added
+- Displaying error message when API is not working
+- Displaying loader when data is loading
+
 #### Improved
+- Band final digital score and hall display
 
 ## [0.2.0] - 2017-09-07
 ### Node API
