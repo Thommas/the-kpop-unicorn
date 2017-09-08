@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Improved
 - Computed concert hall for band based on total digital score
 
+#### Fixed
+- Renamed environment twitter variables
+
 ### React Frontend
 #### Added
 - Displaying error message when API is not working

@@ -11,7 +11,7 @@
     "doc-api": "./node_modules/apidoc/bin/apidoc -i app/ -o ../docs/node-api/",
     "doc-node": "./node_modules/documentation/bin/documentation.js build app/** -f html -o ../docs/node/",
     "test": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 mocha 'app/**/*.spec.js'",
-    "e2e": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 mocha 'e2e/**/*.spec.js'",
+    "e2e": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 mocha --timeout 15000 'e2e/**/*.spec.js'",
     "coverage": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 istanbul cover  --dir '../docs/node-code-coverage' node_modules/mocha/bin/_mocha 'app/**/*.js'"
   },
   "dependencies": {
