@@ -46,13 +46,17 @@ Access the API here: http://localhost:[PORT]
 
 Check carefully environments/environment.test variables.
 
-Run tests:
+Run unit tests:
 
     npm run test
 
-Generate code coverage html files:
+Generate unit tests code coverage html files:
 
     npm run coverage
+
+Run e2e tests:
+
+    npm run e2e
 
 #### Production
 
@@ -72,6 +76,14 @@ Access the API here: https://[PRODUCTION_URL]:[PORT]
 
     cd react
     npm install
+
+#### Setup environments
+
+    cp .env .env.development.local
+    cp .env .env.production.local
+    cp .env .env.test.local
+
+Edit files with your local configuration.
 
 #### Develop
 

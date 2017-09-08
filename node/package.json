@@ -12,7 +12,7 @@
     "doc-node": "./node_modules/documentation/bin/documentation.js build app/** -f html -o ../docs/node/",
     "test": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 mocha 'app/**/*.spec.js'",
     "e2e": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 mocha 'e2e/**/*.spec.js'",
-    "coverage": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 istanbul cover  --dir '../docs/node-code-coverage' node_modules/mocha/bin/_mocha 'test/**/*.js'"
+    "coverage": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 istanbul cover  --dir '../docs/node-code-coverage' node_modules/mocha/bin/_mocha 'app/**/*.js'"
   },
   "dependencies": {
     "axios": "^0.16.2",
