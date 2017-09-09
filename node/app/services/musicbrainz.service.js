@@ -33,6 +33,7 @@ exports.getArtistId = (slug) => {
  * Get album count
  */
 exports.getAlbumCount = (slug) => {
+  return 0;
   return exports.getArtistId(slug)
     .then((artistID) => {
       const url = `${MUSICBRAINZ_API_URL}/release-group?artist=${artistID}&fmt=json`;
@@ -51,6 +52,7 @@ exports.getAlbumCount = (slug) => {
  * Get song count
  */
 exports.getSongCount = (slug) => {
+  return 0;
   return exports.getArtistId(slug)
     .then((artistID) => {
       const url = `${MUSICBRAINZ_API_URL}/release?artist=${artistID}&fmt=json`;
