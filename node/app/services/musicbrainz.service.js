@@ -17,7 +17,7 @@ const MUSICBRAINZ_API_URL = 'https://musicbrainz.org/ws/2';
  */
 exports.getArtistId = (slug) => {
   const band = bandService.getBandBySlug(slug);
-  const url = `${MUSICBRAINZ_API_URL}/artist?query=artist:${band.title} country:KR&limit=10&fmt=json`;
+  const url = `${MUSICBRAINZ_API_URL}/artist?query=artist:${band.title}&limit=10&fmt=json`;
   return axios.get(url)
     .then((response) => {
       const artists = response.data.artists;
@@ -33,9 +33,15 @@ exports.getArtistId = (slug) => {
  * Get album count
  */
 exports.getAlbumCount = (slug) => {
-  return 0;
   return exports.getArtistId(slug)
     .then((artistID) => {
+      if (!artistID) {
+        return {
+          data: {
+            'release-group-count': 0
+          }
+        };
+      }
       const url = `${MUSICBRAINZ_API_URL}/release-group?artist=${artistID}&fmt=json`;
       return axios.get(url);
     })
@@ -52,9 +58,15 @@ exports.getAlbumCount = (slug) => {
  * Get song count
  */
 exports.getSongCount = (slug) => {
-  return 0;
   return exports.getArtistId(slug)
     .then((artistID) => {
+      if (!artistID) {
+        return {
+          data: {
+            'release-group-count': 0
+          }
+        };
+      }
       const url = `${MUSICBRAINZ_API_URL}/release?artist=${artistID}&fmt=json`;
       return axios.get(url);
     })
